@@ -1,0 +1,7 @@
+﻿elpa
+url
+auto-save-list
+*.el#
+projects
+*.el~
+transient
