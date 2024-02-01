@@ -5,3 +5,5 @@ auto-save-list
 projects
 *.el~
 transient
+.cache
+.lsp-session-v1

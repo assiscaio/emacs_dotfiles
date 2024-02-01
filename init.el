@@ -101,6 +101,7 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook (
 	 (angular-mode . lsp)
+	 (typescript-mode . lsp)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 (use-package lsp-ui :commands lsp-ui-mode)
@@ -110,7 +111,13 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode)
 )
-;;
+;;Langs
+(use-package angular-mode)
+(use-package typescript-mode)
+(use-package ng2-mode)
+
+
+;; Auto Config
 (put 'upcase-region 'disabled nil)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -120,7 +127,7 @@
  '(custom-safe-themes
    '("77f1e155387d355fbbb3b382a28da41cc709b2a1cc71e7ede03ee5c1859468d2" default))
  '(package-selected-packages
-   '(lsp-ivy lsp evil helpful counsel ivy-rich rainbow-delimiters zenburn-theme which-key wfnames undo-tree tide popup magit lsp-ui lsp-treemacs ivy helm-core crux company command-log-mode clojure-mode)))
+   '(ng2-mode typescript-mode angular-mode lsp-ivy lsp evil helpful counsel ivy-rich rainbow-delimiters zenburn-theme which-key wfnames undo-tree tide popup magit lsp-ui lsp-treemacs ivy helm-core crux company command-log-mode clojure-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
