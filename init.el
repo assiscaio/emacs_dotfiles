@@ -1,5 +1,7 @@
 ;; Flag
 (setq inhibit-startup-message t)
+(setq read-process-output-max (* 1024 1024))
+(setq gc-cons-threshold 100000000)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -44,9 +46,10 @@
 ;(use-package command-log-mode)
 (use-package ivy
   :diminish
-  :bind(;("C-s" . swiper)
+  :bind(("C-s" . swiper)
 	:map ivy-minibuffer-map
 	("TAB" . ivy-alt-done)
+
 	("C-l" . ivy-alt-done)
 	("C-j" . ivy-next-line)
 	("C-k" . ivy-previous-line)
@@ -59,9 +62,10 @@
 	("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1))
+;(use-package ivy-rich
+  ;:init
+  ;(ivy-rich-mode 1)
+;)
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
 	 ("C-x b" . counsel-ibuffer)
@@ -94,17 +98,25 @@
   :init
   (evil-mode 1)
 )
+(use-package tide
+  :ensure t
+  :after (company flycheck)
+  :hook ((typescript-ts-mode . tide-setup)
+	 (tsx-ts-mode . tide-setup)
+	 (typescript-ts-mode . tide-hl-identifier-mode)
+	 (before-save . tide-format-before-save)))
 ;;
 ;; LSP
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook (
-	 (angular-mode . lsp)
-	 (typescript-mode . lsp)
+	 ;(angular-mode . lsp)
+	 ;(typescript-mode . lsp)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
-(use-package lsp-ui :commands lsp-ui-mode)
+;;(use-package lsp-ui :commands lsp-ui-mode)
+(use-package yasnippet)
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-error-list)
 (use-package company
@@ -127,7 +139,7 @@
  '(custom-safe-themes
    '("77f1e155387d355fbbb3b382a28da41cc709b2a1cc71e7ede03ee5c1859468d2" default))
  '(package-selected-packages
-   '(ng2-mode typescript-mode angular-mode lsp-ivy lsp evil helpful counsel ivy-rich rainbow-delimiters zenburn-theme which-key wfnames undo-tree tide popup magit lsp-ui lsp-treemacs ivy helm-core crux company command-log-mode clojure-mode)))
+   '(yasnippet ng2-mode typescript-mode angular-mode lsp-ivy lsp evil helpful counsel ivy-rich rainbow-delimiters zenburn-theme which-key wfnames undo-tree tide popup magit lsp-ui lsp-treemacs ivy helm-core crux company command-log-mode clojure-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
