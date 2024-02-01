@@ -91,7 +91,25 @@
   :config
   (global-set-key (kbd "C-;") 'avy-goto-char))
 (use-package evil
-  :init (evil-mode 1))
+  :init
+  (evil-mode 1)
+)
+;;
+;; LSP
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (
+	 (angular-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-error-list)
+(use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+)
 ;;
 (put 'upcase-region 'disabled nil)
 (custom-set-variables
@@ -102,7 +120,7 @@
  '(custom-safe-themes
    '("77f1e155387d355fbbb3b382a28da41cc709b2a1cc71e7ede03ee5c1859468d2" default))
  '(package-selected-packages
-   '(evil helpful counsel ivy-rich rainbow-delimiters zenburn-theme which-key wfnames undo-tree tide popup magit lsp-ui lsp-treemacs ivy helm-core crux company command-log-mode clojure-mode)))
+   '(lsp-ivy lsp evil helpful counsel ivy-rich rainbow-delimiters zenburn-theme which-key wfnames undo-tree tide popup magit lsp-ui lsp-treemacs ivy helm-core crux company command-log-mode clojure-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
